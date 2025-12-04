@@ -1,0 +1,450 @@
+---
+title: "Task1"
+author: "Elena Chandogova"
+date: "20/10/2025"
+format:
+  html:
+    embed-resources: true
+editor: source
+---
+
+## Question 1 Atomic types
+
+Question description
+
+```{r}
+# code for solving task
+# numeric
+population <- 40000
+area <- 60
+avg_temp <- 8
+bridges <- 1
+
+#integer
+schools <- 2
+parks <- 3
+churches <- 2
+
+#logical
+green_buildings <- FALSE
+UNESCO <- FALSE
+
+#character
+city_name <- "Madion"
+river_name <- "Sin"
+famous_monument <- "Museum"
+```
+
+
+## Question 2 Vectors
+
+Question description
+
+```{r}
+# code for solving task
+#numeric vector
+num_vector <- c(population, area, avg_temp, bridges, schools, parks, bridges)
+
+#sequence vector
+s_vector <- seq(from = 0, to = 100, by = 5)
+
+#logical vector
+l_vector <- sample(c(TRUE,FALSE),size=10, replace = TRUE)
+
+```
+## Question 3 Matrix
+
+Question description
+
+```{r}
+# code for solving task
+x <- sample(-50:50, 9, replace = TRUE)
+m <- matrix(x, nrow = 3, ncol = 3)
+rownames(m) <- c("R1","R2","R3")
+colnames(m) <- c("C1","C2","C3")
+
+row_means <- rowMeans(m)
+col_means <- colMeans(m)
+```
+## Question 4 List
+
+Question description
+
+```{r}
+# code for solving task
+T_list <- list(population = population,
+                area=area,
+               avg_temp=avg_temp,
+               parks=parks,
+               bridges=bridges,
+               schools=schools,
+               UNESCO=UNESCO,
+               green_buildings=green_buildings,
+               city_name=city_name,
+               river_name=river_name,
+               num_vector=num_vector<-c(population, area, avg_temp, bridges, schools, parks, bridges),
+               s_vector=s_vector <- seq(from = 0, to = 100, by =5),
+               l_vector=l_vector <- sample(c(TRUE,FALSE),size=10, replace = TRUE),
+               m=m,
+               T_descript = 'Madion, mesto fantazie')
+
+```
+## Question 5 Factor
+
+Question description
+
+```{r}
+# code for solving task
+development_level <- factor(c('very low','low', 'medium','high','very high'), levels = c('very low','low', 'medium','high','very high'))
+
+table(development_level)
+
+```
+## Question 6 Data frame
+
+Question description
+
+```{r}
+# code for solving task
+cities_data <- data.frame(
+  cities = c('Madien', 'Banska Bystrica', 'Topolcany', 'Presov', 'Nitra', 'Bratislava'),
+  population = c(40000, 73040, 27124, 91638, 78000, 475000),
+  area = c(60, 103, 27, 70, 100, 367),
+  unesco = c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)
+)
+
+colnames(cities_data) <- c('City', 'Population', 'Area', 'UNESCO')
+
+str(cities_data)
+summary(cities_data)
+
+cities_data$Density <- cities_data$Population / cities_data$Area
+
+cities_data
+```
+
+##TASK 2: Subsetting & Missing Data
+"Elena Chandogova"
+"10/11/2025"
+### 2.1. Querying Vectors
+
+```{r}
+# code for solving task
+# 2.1.1. Sequence vector
+# 3th element
+third_el <- s_vector[3]
+third_el
+
+# 2 to 5
+two_five <- s_vector[2:5]
+two_five
+
+#greater than 20
+greater_20 <- s_vector[s_vector > 20]
+greater_20
+
+# 2.1.2. Logical vector
+# true values
+true_vl <- l_vector[l_vector]
+true_vl
+
+# index
+true_pst <- which(l_vector)
+true_pst
+```
+
+### 2.2 Querying Your "Madion" List
+```{r}
+# code for solving task
+# Using the '$' operator
+T_list$T_descript
+
+# matrix [[]]
+T_list[['m']]
+
+# second element
+T_list[["num_vector"]][2]
+
+```
+
+### 2.3. Investigating Your Data Frame
+```{r}
+# code for solving task
+# first 3 rows
+head(cities_data, 3)
+
+# 4th row, 1st column
+cities_data[4, 1]
+
+# contains logical value
+cities_data$UNESCO
+```
+
+### 2.4. Handling "Corrupted" Data (`NA`)
+```{r}
+# code for solving task
+#copying data
+df_corrupted <- cities_data
+#NA
+df_corrupted[2, "Area"] <- NA
+df_corrupted[5, "Population"] <- NA
+df_corrupted[6, "UNESCO"] <- NA
+#count NA
+sum(is.na(df_corrupted))
+#count column NA
+colSums(is.na(df_corrupted))
+#mean of population with NA
+mean(df_corrupted$Population)
+#mean of population without NA
+mean(df_corrupted$Population, na.rm = TRUE)
+#remove NA
+df_clean <- na.omit(df_corrupted)
+df_clean
+```
+
+### 2.5. Bonus Challenge which
+```{r}
+# code for solving task
+#highest population
+highest_pop_index <- which.max(cities_data$Population)
+cities_data[highest_pop_index, ]
+#lowest destiny
+lowest_density_index <- which.min(cities_data$Density)
+cities_data[lowest_density_index, ]
+```
+## TASK 3: Expanding Your Universe
+
+### 3.1. The Quest: Find Your Data
+```{r}
+# code for solving task
+# import from: 'https://www.kaggle.com/datasets/juanmah/world-cities'
+library(readr)
+worldcities <- read_csv('worldcities.csv')
+View(worldcities)
+
+head(worldcities)
+str(worldcities)
+summary(worldcities)
+```
+
+### 3.2. The Import: Load Your Data
+```{r}
+# code for solving task
+# load libraries
+library(dplyr)
+library(readr)
+
+ # read data
+# Load your data (replace with your file's name)
+my_real_data <- read_csv("worldcities.csv")
+
+# first inspection
+glimpse(worldcities)
+head(worldcities)
+summary(worldcities)
+```
+
+### 3.3 The interogation: Explore with 'dplyr'
+
+# Question 1: Group by UNESCO status and summarise the average population
+```{r}
+# code for solving task
+cities_data %>%
+group_by(UNESCO) %>%
+summarise(avg_population = mean(Population, na.rm = TRUE),
+max_population = max(Population, na.rm = TRUE),
+n_cities = n())
+```
+
+# Question 2: Select only the columns 'city' and 'population' from the dataset
+```{r}
+# code for solving task
+cities_data %>%
+select(City, Population)
+```
+# Question 3: Filter cities with a population greater than 100000
+```{r}
+# code for solving task
+cities_data %>%
+filter(Population > 10000)
+```
+
+# Question 4: Arrange the cities by area in ascending order
+```{r}
+# code for solving task
+cities_data %>%
+arrange(Area)
+```
+
+# Question 5: Create a new column 'Population_million' that shows population in millions
+```{r}
+# code for solving task
+cities_data %>%
+mutate(Population_million = Population / 1e6)
+```
+# Task 4. Building a “Toolkit” for Your Universe (Functions)
+# 4.1. The “Greeting” Function (A Simple Start)
+```{r}
+greet_universe_pretty <- function(universe_name, your_name, num_cities, avg_pop) {
+cat("\033[1;34m") # Bold blue text
+cat("========================================\n")
+cat("✨ Welcome to the Universe:", universe_name, "✨\n")
+cat("----------------------------------------\n")
+cat("\033[0;32m") # Green text
+cat("Report prepared by:", your_name, "\n")
+cat("Number of cities in dataset:", num_cities, "\n")
+cat("Average city population:", round(avg_pop, 0), "\n")
+cat("\033[1;34m") # Bold blue again
+cat("========================================\n")
+cat("\033[0m") # Reset color
+}
+```
+# Call the function with actual data from cities_data
+```{r}
+greet_universe_pretty(
+universe_name = "Madion",
+your_name = "Elena Chandogova",
+num_cities = nrow(cities_data),
+avg_pop = mean(cities_data$Population)
+)
+```
+# The “Loading” Function (A Good Practice)
+```{r}
+# Enhanced function to load and inspect dataset
+load_and_inspect_pretty <- function(file_path, universe_name, your_name) {
+  data <- read_csv(file_path)
+  
+# Greeting
+  cat("\033[1;34m")
+  cat("============================================\n")
+  cat("🌟 Welcome to the Universe:", universe_name, "🌟\n")
+  cat("--------------------------------------------\n")
+  cat("\033[0;32m")
+  cat("Report prepared by:", your_name, "\n")
+  cat("Dataset loaded from:", file_path, "\n")
+  cat("Number of rows:", nrow(data), "\n")
+  cat("Number of columns:", ncol(data), "\n")
+  cat("\033[1;34m")
+  cat("============================================\n\n")
+  
+# Inspect dataset
+  cat("--- Structure of the dataset ---\n")
+  print(glimpse(data))
+  
+  cat("\n--- First 6 Rows ---\n")
+  print(head(data))
+  
+  cat("\n--- Summary ---\n")
+  print(summary(data))
+  
+  cat("\033[0m") # Reset color
+  
+  return(data)
+}
+
+# Call the function and save output
+my_data <- load_and_inspect_pretty(
+  file_path = "worldcities.csv",
+  universe_name = "Madion",
+  your_name = "Elena Chandogova"
+)
+```
+# The “Query” Function (The Core of the Task)
+```{r}
+filter_cities_by_population <- function(data, pop_threshold) {
+  result <- data %>%
+    filter(Population > pop_threshold) %>%
+    arrange(desc(Population)) # optional: sort from largest to smallest
+  return(result)
+}
+# Call the function using 'cities_data' from Task 3
+large_cities <- filter_cities_by_population(cities_data, pop_threshold = 80000)
+# Print the results
+print(large_cities)
+```
+# The “Reporting” Function
+```{r}
+generate_report <- function(data, city_name) {
+  
+  # 1. Filter for the selected city
+  city_data <- data %>%
+    filter(City == city_name)
+  
+  # Check if city exists
+  if(nrow(city_data) == 0){
+    cat("City", city_name, "not found in the dataset.\n")
+    return(NULL)
+  }
+  
+  # 2. Calculate key statistics
+  pop <- city_data$Population
+  area <- city_data$Area
+  density <- city_data$Density
+  unesco <- city_data$UNESCO
+  record_count <- nrow(city_data)
+  
+  # 3. Print the report
+  cat("========================================\n")
+  cat("📊 Report for:", city_name, "\n")
+  cat("----------------------------------------\n")
+  cat("Number of Records:", record_count, "\n")
+  cat("Population:", pop, "\n")
+  cat("Area (km²):", area, "\n")
+  cat("Population Density:", round(density, 2), "\n")
+  cat("UNESCO Site:", ifelse(unesco, "Yes", "No"), "\n")
+  cat("========================================\n\n")
+}
+
+# Call the function for two cities
+generate_report(cities_data, "Bratislava")
+generate_report(cities_data, "Nitra")
+```
+# Installing
+```{r}
+# 2. Načítanie balíka
+library(ggplot2)
+```
+# Relationship Map: Scatter Plot of Population vs Area
+```{r}
+ggplot(data = cities_data, aes(x = Area, y = Population)) +
+  geom_point(alpha = 0.7, size = 3, colour = "blue") +
+  geom_smooth(method = "loess", se = TRUE, color = "gray") +
+  labs(title = "Population vs Area of Cities",
+       subtitle = "Relationship between city size and population",
+       x = "Area (km²)",
+       y = "Population") +
+  theme_minimal()
+```
+# Comparison: Boxplot of Population by UNESCO status
+```{r}
+ggplot(data = cities_data, aes(x = UNESCO, y = Population, fill = UNESCO)) +
+  geom_boxplot() +
+  labs(title = "Comparison of Population by UNESCO Status",
+       x = "UNESCO Site",
+       y = "Population") +
+  theme_light() +
+  theme(legend.position = "none")
+```
+# Deep Dive: Faceted Histogram of Population by UNESCO status
+```{r}
+ggplot(data = cities_data, aes(x = Population)) +
+  geom_histogram(bins = 10, fill = "coral", color = "black") +
+  facet_wrap(~ UNESCO) +
+  labs(title = "Distribution of Population by UNESCO Status",
+       x = "Population",
+       y = "Count") +
+  theme_minimal()
+```
+# Exporting the favourite plot
+```{r}
+scatter_plot <- ggplot(data = cities_data, aes(x = Area, y = Population)) +
+  geom_point(alpha = 0.7, size = 3, colour = "blue", na.rm = TRUE) +
+  geom_smooth(method = "loess", se = TRUE, color = "gray", na.rm = TRUE) +
+  labs(title = "Population vs Area of Cities",
+       subtitle = "Relationship between city size and population",
+       x = "Area (km²)",
+       y = "Population") +
+  theme_minimal()
+
+scatter_plot
+```
